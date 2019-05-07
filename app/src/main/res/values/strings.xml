@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Foosic App</string>
+    <string name="title_activity_taste">Taste</string>
+    <string name="title_activity_layout">Layout</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
