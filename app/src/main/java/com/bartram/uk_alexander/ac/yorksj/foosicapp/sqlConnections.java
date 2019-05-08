@@ -18,8 +18,6 @@ public class sqlConnections extends AsyncTask<Void, Void, String> {
     public sqlConnections(){
     }
 
-
-
     @Override
     protected String doInBackground(Void... voids) {
 

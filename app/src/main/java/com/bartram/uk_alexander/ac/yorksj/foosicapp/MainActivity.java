@@ -1,7 +1,9 @@
 package com.bartram.uk_alexander.ac.yorksj.foosicapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
@@ -45,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
         //Initialise variables
         txtError = (TextView) findViewById(R.id.txtConnectionError);
         btnRetry = (Button) findViewById(R.id.btnRetry);
@@ -68,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
         txtError.setText("");
         if (checkConnection() && checkSQLConnection()) {
             //TODO loadData from SQL database before app launches
+                Intent i = new Intent(this, homeScreenGuest.class);
+                startActivity(i);
+
             txtError.setText("COMPLETED");
             checkSQLConnection();
 
