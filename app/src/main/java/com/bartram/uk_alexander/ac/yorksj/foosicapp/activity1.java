@@ -3,6 +3,7 @@ package com.bartram.uk_alexander.ac.yorksj.foosicapp;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -26,20 +27,23 @@ public class activity1 extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText("home");
+                    Fragment fragment1 = new MainFragment();
+                    moveToFragment(fragment1);
+                    //mTextMessage.setText("home");
                     return true;
                 case R.id.navigation_taste:
+                    Fragment fragment2 = new TasteFragment();
+                    moveToFragment(fragment2);
                     //mTextMessage.setText("taste");
-
                     return true;
                 case R.id.navigation_music:
-                    mTextMessage.setText("music");
+                    //mTextMessage.setText("music");
                     return true;
                 case R.id.navigation_favourites:
-                    mTextMessage.setText("favourites");
+                    //mTextMessage.setText("favourites");
                     return true;
                 case R.id.navigation_food:
-                    mTextMessage.setText("food");
+                    //mTextMessage.setText("food");
                     return true;
             }
             return false;
@@ -47,12 +51,18 @@ public class activity1 extends AppCompatActivity {
     };
 
 
-
+    private void moveToFragment(Fragment fragment){
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, fragment, fragment.getClass().getSimpleName()).addToBackStack(null).commit();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity1);
+        Fragment fragment = new MainFragment();
+        Fragment sFragment = new MainFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, fragment, fragment.getClass().getSimpleName()).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.settings_frame, sFragment, fragment.getClass().getSimpleName()).addToBackStack(null).commit();
         imgSettings = (ImageView) findViewById(R.id.imgSettings);
 
 
