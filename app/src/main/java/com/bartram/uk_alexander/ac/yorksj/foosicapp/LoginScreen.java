@@ -15,7 +15,8 @@ public class LoginScreen extends AppCompatActivity {
     private Button btnSubmit;
     private TextInputLayout tilUsername;
     private TextInputLayout tilPassword;
-    private int result = 0;
+    private loginSQL sqlLogin = new loginSQL();
+    private String result = "";
 
 
     @Override
@@ -28,6 +29,9 @@ public class LoginScreen extends AppCompatActivity {
      tilPassword = (TextInputLayout) findViewById(R.id.txtInputPassword);
       tilUsername.setHint("Email Address");
        tilPassword.setHint("Password");
+
+
+        sqlLogin.parent = this;
 
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
 
@@ -45,9 +49,10 @@ public class LoginScreen extends AppCompatActivity {
             public void onClick(View v) {
                String username = tilUsername.getEditText().getText().toString();
                String password = tilPassword.getEditText().getText().toString();
-               loginSQL sqlLogin = new loginSQL();
+
                sqlLogin.execute(username, password);
-               if (result == 1){
+
+               if (!result.equals("")){
                    Toast.makeText(getApplicationContext(), "User signed", Toast.LENGTH_SHORT).show();
                }else {
                     Toast.makeText(getApplicationContext(), "User denied", Toast.LENGTH_SHORT).show();
@@ -62,11 +67,16 @@ public class LoginScreen extends AppCompatActivity {
 
     }
 
-    public void loginSuccessful(String s){
-        if (s.equals("Login Successful!")){
-            result = 1;
-        }else
 
-            result = 0;
+    public void loginSuccessful(String s){
+        try {
+            if (Integer.parseInt(s) > 0) {
+                result = s;
+            }
+        }catch (NumberFormatException e){
+            result = "";
+            e.printStackTrace();
+
+        }
     }
 }

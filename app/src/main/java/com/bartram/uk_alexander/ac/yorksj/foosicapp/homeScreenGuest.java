@@ -1,8 +1,11 @@
 package com.bartram.uk_alexander.ac.yorksj.foosicapp;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,6 +15,8 @@ public class homeScreenGuest extends AppCompatActivity {
 
     private ImageView imgLogo;
     private Button btnLogin;
+    private SoundbiteNavigationView nav;
+    public homeScreenGuest parent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +30,7 @@ public class homeScreenGuest extends AppCompatActivity {
         imgLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), homeScreenGuest.class);
+                Intent i = new Intent(v.getContext(), foodScreen.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }
@@ -40,7 +45,14 @@ public class homeScreenGuest extends AppCompatActivity {
             }
         });
 
+        //Initalise the Nav Bar
+       nav = findViewById(R.id.navigation);
+
 
 
     }
+
+
+
+
 }

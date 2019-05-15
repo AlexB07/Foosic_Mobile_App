@@ -9,6 +9,7 @@
 
     <ImageView
         android:id="@+id/imgLogoTopRight"
+        android:contentDescription="@string/Logo"
         android:layout_width="71dp"
         android:layout_height="62dp"
         android:layout_marginStart="16dp"
@@ -19,6 +20,7 @@
 
     <ImageView
         android:id="@+id/imgSettings"
+        android:contentDescription="@string/Settings"
         android:layout_width="50dp"
         android:layout_height="53dp"
         android:layout_marginTop="21dp"
@@ -34,7 +36,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="104dp"
         android:layout_marginEnd="8dp"
-        android:text="Username:"
+        android:text="@string/usernameLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +57,7 @@
             android:id="@+id/txtInputUsername"
             android:layout_width="match_parent"
             android:layout_height="43dp"
-            android:hint="Email Address"
+            android:hint="@string/textUsername"
             android:inputType="textEmailAddress" />
     </android.support.design.widget.TextInputLayout>
 
@@ -66,7 +68,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
-        android:text="Password:"
+        android:text="@string/passwordLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,9 +89,8 @@
             android:id="@+id/Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="@string/textPassword"
             android:inputType="textPassword"
-
             />
 
     </android.support.design.widget.TextInputLayout>
@@ -101,7 +102,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
-        android:text="Haven't got an account? Click Here"
+        android:text="@string/noAccount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtInputPassword" />
@@ -113,7 +114,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="11dp"
         android:layout_marginEnd="8dp"
-        android:text="Forgot your password? Click Here"
+        android:text="@string/forgotPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -127,7 +128,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/buttonstyle"
-        android:text="Submit"
+        android:text="@string/btnSubmit"
         android:textColor="#FFFFFF"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"

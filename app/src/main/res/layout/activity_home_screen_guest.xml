@@ -9,6 +9,7 @@
 
     <ImageView
         android:id="@+id/imgLogoTopRight"
+        android:contentDescription="@string/Logo"
         android:layout_width="71dp"
         android:layout_height="62dp"
         android:layout_marginStart="16dp"
@@ -19,6 +20,7 @@
 
     <ImageView
         android:id="@+id/imgSettings"
+        android:contentDescription="@string/Settings"
         android:layout_width="50dp"
         android:layout_height="53dp"
         android:layout_marginTop="21dp"
@@ -29,6 +31,7 @@
 
     <ImageView
         android:id="@+id/imgName"
+        android:contentDescription="@string/nameLogo"
         android:layout_width="367dp"
         android:layout_height="220dp"
         android:layout_marginStart="8dp"
@@ -46,7 +49,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
-        android:text="Logged in as guest"
+        android:text="@string/welcome"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -61,7 +64,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/buttonstyle"
-        android:text="Login"
+        android:text="@string/btnLogin"
         android:textColor="#FFFFFF"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,14 +78,14 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="8dp"
-        android:text="Login to gain access: \n - Statistics \n - Recent Meals \n - Favourites"
+        android:text="@string/features"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtGuest" />
 
 
-    <android.support.design.widget.BottomNavigationView
+    <com.bartram.uk_alexander.ac.yorksj.foosicapp.SoundbiteNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="50dp"

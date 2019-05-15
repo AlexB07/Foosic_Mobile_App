@@ -5,7 +5,6 @@ import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.DataOutput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,14 +12,13 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.nio.Buffer;
 import java.util.HashMap;
 
-public class loginSQL extends AsyncTask<String, Void, String> {
+public class findSong extends AsyncTask <String, Void, String> {
 
-        public LoginScreen parent;
+    public TasteScreen parent;
+
     @Override
     protected String doInBackground(String... strings) {
 
@@ -31,8 +29,10 @@ public class loginSQL extends AsyncTask<String, Void, String> {
         String result = "";
 
         HashMap<String, String> params = new HashMap<String, String>();
-        params.put("email",strings[0]);
-        params.put("pass", strings[1]);
+        params.put("sweet",strings[0]);
+        params.put("sour", strings[1]);
+        params.put("salty",strings[2]);
+        params.put("bitter", strings[3]);
         StringBuilder sbParams = new StringBuilder();
         int i = 0;
         for (String key : params.keySet()){
@@ -48,7 +48,7 @@ public class loginSQL extends AsyncTask<String, Void, String> {
         }
 
         try {
-            url = new URL("https://cs2s.yorkdc.net/~george.causer/Login.php");
+            url = new URL("https://cs2s.yorkdc.net/~alexander.bartram/findSong.php");
             conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
@@ -78,7 +78,7 @@ public class loginSQL extends AsyncTask<String, Void, String> {
                 res.append(line);
             }
 
-            Log.d("Login", "result from server: " + res.toString());
+            Log.d("findSong", "result from server: " + res.toString());
             return res.toString();
         }catch (IOException e){
             e.printStackTrace();
@@ -91,14 +91,17 @@ public class loginSQL extends AsyncTask<String, Void, String> {
         return result;
     }
 
+
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        String test = s;
+        String test = s; //Tesing debugging statement
+        parent.testingSongOutput(s);
 
-        parent.loginSuccessful(s);
 
 
     }
+
+
 
 }

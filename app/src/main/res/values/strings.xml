@@ -1,3 +1,41 @@
 <resources>
-    <string name="app_name">Foosic App</string>
+    <string name="app_name">Soundbite App</string>
+    <string name="breakfast_name">Breakfast</string>
+    <string name="lunch_name">Lunch</string>
+    <string name="dinner_name">Dinner</string>
+    <string name="text_col">Collapsed</string>
+    <string name="text_exp">Expanded</string>
+    <string name="Logo">Logo</string>
+    <string name="Settings">Setting Logo</string>
+    <string name="nameLogo">Logo Name</string>
+    <string name="welcome">Logged In As Guest</string>
+    <string name="btnLogin">Login</string>
+    <string name="features">Login to gain access: \n - Statistics \n - Recent Meals \n - Favourites</string>
+    <string name="usernameLabel">Username: </string>
+    <string name="textUsername">Email Address</string>
+    <string name="passwordLabel">Password: </string>
+    <string name="textPassword">Password</string>
+    <string name="noAccount">Haven\&#39;t got an account? Click Here</string>
+    <string name="forgotPassword">Forgot your password? Click Here</string>
+    <string name="btnSubmit">Submit</string>
+
+    <string-array name="string_array_breakfast">
+        <item>Cereal</item>
+        <item>Toast</item>
+        <item>Fruit</item>
+    </string-array>
+
+    <string-array name="string_array_lunch">
+        <item>Sandwiches</item>
+        <item>Pasta</item>
+        <item>Salad</item>
+    </string-array>
+
+    <string-array name="string_array_dinner">
+        <item>Pizza</item>
+        <item>Curry</item>
+        <item>Chicken and Chips</item>
+    </string-array>
+
+
 </resources>
