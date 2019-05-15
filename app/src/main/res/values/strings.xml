@@ -1,11 +1,32 @@
 <resources>
-    <string name="app_name">Foosic App</string>
     <string name="title_activity_taste">Taste</string>
     <string name="title_activity_layout">Layout</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-
+    <string name="app_name">Soundbite App</string>
+    <string name="breakfast_name">Breakfast</string>
+    <string name="lunch_name">Lunch</string>
+    <string name="dinner_name">Dinner</string>
+    <string name="text_col">Collapsed</string>
+    <string name="text_exp">Expanded</string>
+    <string name="Logo">Logo</string>
+    <string name="Settings">Setting Logo</string>
+    <string name="nameLogo">Logo Name</string>
+    <string name="welcome">Logged In As Guest</string>
+    <string name="btnLogin">Login</string>
+    <string name="features">Login to gain access: \n - Statistics \n - Recent Meals \n - Favourites</string>
+    <string name="usernameLabel">Username: </string>
+    <string name="textUsername">Email Address</string>
+    <string name="passwordLabel">Password: </string>
+    <string name="textPassword">Password</string>
+    <string name="noAccount">Haven\&#39;t got an account? Click Here</string>
+    <string name="forgotPassword">Forgot your password? Click Here</string>
+    <string name="btnSubmit">Submit</string>
+    <string name="firstName">First Name:</string>
+    <string name="email">Email: </string>
+    <string name="ageText">Age: </string>
+    <string name="btnCancel">Cancel</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

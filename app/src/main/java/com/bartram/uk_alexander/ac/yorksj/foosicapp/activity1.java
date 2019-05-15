@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,8 +16,10 @@ import com.bartram.uk_alexander.ac.yorksj.foosicapp.guestscreens.Taste;
 
 public class activity1 extends AppCompatActivity {
 
+
     private TextView mTextMessage;
     private ImageView imgSettings;
+    private FrameLayout fragment_frame;
 
 
 
@@ -50,9 +53,12 @@ public class activity1 extends AppCompatActivity {
         }
     };
 
-
-    private void moveToFragment(Fragment fragment){
+    public void moveToFragment(Fragment fragment){
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, fragment, fragment.getClass().getSimpleName()).addToBackStack(null).commit();
+    }
+
+    private void moveToSettings(Fragment fragment){
+        getSupportFragmentManager().beginTransaction().replace(R.id.settings_frame, fragment, fragment.getClass().getSimpleName()).addToBackStack(null).commit();
     }
 
     @Override
@@ -60,7 +66,7 @@ public class activity1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity1);
         Fragment fragment = new MainFragment();
-        Fragment sFragment = new MainFragment();
+        Fragment sFragment = new Empty();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, fragment, fragment.getClass().getSimpleName()).addToBackStack(null).commit();
         getSupportFragmentManager().beginTransaction().replace(R.id.settings_frame, sFragment, fragment.getClass().getSimpleName()).addToBackStack(null).commit();
         imgSettings = (ImageView) findViewById(R.id.imgSettings);
@@ -72,7 +78,8 @@ public class activity1 extends AppCompatActivity {
 
         imgSettings.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
+                Fragment fragment6 = new SettingsFragment();
+                moveToSettings(fragment6);
             }
         });
     }
