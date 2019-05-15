@@ -24,7 +24,7 @@ public class foodScreen extends AppCompatActivity {
 
     private ExpandableListViewAdpter explistAdapter;
     private List<String> listViewGroup;
-    private HashMap<String, List<String>> listViewChid;
+    private HashMap<String, String[][]> listViewChid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +58,6 @@ public class foodScreen extends AppCompatActivity {
     }
 
 
-
     private void initViews() {
 
         expandableListView = findViewById(R.id.expList);
@@ -81,8 +80,7 @@ public class foodScreen extends AppCompatActivity {
                         listViewGroup.get(groupPosition)
                                 + " : "
                                 + listViewChid.get(
-                                listViewGroup.get(groupPosition)).get(
-                                childPosition), Toast.LENGTH_SHORT)
+                                listViewGroup.get(groupPosition))[childPosition][1], Toast.LENGTH_SHORT)
                         .show();
                 return false;
             }
@@ -133,58 +131,66 @@ public class foodScreen extends AppCompatActivity {
     }
 
 
+    private void initListData() {
 
 
+        // Adding group data
+        listViewGroup.add(getString(R.string.breakfast_name));
+        listViewGroup.add(getString(R.string.lunch_name));
+        listViewGroup.add(getString(R.string.dinner_name));
+
+        // array of strings
+        String[] array;
+
+        // list for Breakfast
+        String[][] breakfastList = new String[3][2];
+        //Intitalising the breakfast list
+        breakfastList[0][0] = "Cereal";
+        breakfastList[0][1] = "1";
+
+        breakfastList[1][0] = "Toast";
+        breakfastList[1][1] = "1";
+
+        breakfastList[2][0] = "Fruit";
+        breakfastList[2][1] = "1";
+
+        // list for Lunch
+        String[][] lunchList = new String[3][2];
+        //Intitalising the breakfast list
+        lunchList[0][0] = "Pasta";
+        lunchList[0][1] = "1";
+
+        lunchList[1][0] = "Sandwiches";
+        lunchList[1][1] = "1";
+
+        lunchList[2][0] = "Salad";
+        lunchList[2][1] = "1";
+
+        // list for Dinner
+        String[][] dinnerList = new String[3][2];
+        //Intitalising the breakfast list
+        dinnerList[0][0] = "Pizza";
+        dinnerList[0][1] = "1";
+
+        dinnerList[1][0] = "Curry";
+        dinnerList[1][1] = "1";
+
+        dinnerList[2][0] = "Chicken";
+        dinnerList[2][1] = "1";
 
 
-
-        private void initListData() {
-
-
-            // Adding group data
-            listViewGroup.add(getString(R.string.breakfast_name));
-            listViewGroup.add(getString(R.string.lunch_name));
-            listViewGroup.add(getString(R.string.dinner_name));
-
-            // array of strings
-            String[] array;
-
-            // list for Breakfast
-            List<String> breakfastList = new ArrayList<>();
-            array = getResources().getStringArray(R.array.string_array_breakfast);
-            for (String item : array) {
-                breakfastList.add(item);
-            }
-
-            // list for Lunch
-            List<String> lunchList = new ArrayList<>();
-            array = getResources().getStringArray(R.array.string_array_lunch);
-            for (String item : array) {
-                lunchList.add(item);
-            }
-
-            // list for Dinner
-            List<String> dinnerList = new ArrayList<>();
-            array = getResources().getStringArray(R.array.string_array_dinner);
-            for (String item : array) {
-                dinnerList.add(item);
-            }
+        // Adding child data
 
 
-
-            // Adding child data
-
-
-            listViewChid.put(listViewGroup.get(0), breakfastList);
-            listViewChid.put(listViewGroup.get(1), lunchList);
-            listViewChid.put(listViewGroup.get(2), dinnerList);
+        listViewChid.put(listViewGroup.get(0), breakfastList);
+        listViewChid.put(listViewGroup.get(1), lunchList);
+        listViewChid.put(listViewGroup.get(2), dinnerList);
 
 
-            // notify the adapter
-            explistAdapter.notifyDataSetChanged();
-        }
-
-
-
+        // notify the adapter
+        explistAdapter.notifyDataSetChanged();
     }
+
+
+}
 
