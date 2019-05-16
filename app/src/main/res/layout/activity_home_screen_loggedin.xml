@@ -29,6 +29,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/imgName"
+        android:contentDescription="@string/nameLogo"
+        android:layout_width="367dp"
+        android:layout_height="220dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_soundbitetextlogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imgLogoTopRight" />
+
+
     <com.bartram.uk_alexander.ac.yorksj.foosicapp.SoundbiteNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
