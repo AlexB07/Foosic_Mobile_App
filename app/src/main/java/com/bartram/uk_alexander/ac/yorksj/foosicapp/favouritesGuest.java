@@ -20,10 +20,15 @@ public class favouritesGuest extends AppCompatActivity {
         super.onCreate(savedInstatnceState);
 
         if (data.getUserID() != "") {
-            setContentView(R.layout.activity_favourites_loggedin);
+            Intent il = new Intent(nav.getContext(), favouritesLoggedIn.class);
+            il.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(il);
         }
         else {
-            setContentView(R.layout.activity_favourites_guest);
+            Intent ig = new Intent(nav.getContext(), favouritesGuest.class);
+            ig.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(ig);
+
             imgLogo = (ImageView) findViewById(R.id.imgLogoTopRight);
             btnLogin = (Button) findViewById(R.id.btnFavLogin);
             nav = findViewById(R.id.navigation);

@@ -15,10 +15,15 @@ public class favouritesLoggedIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstatnceState){
         super.onCreate(savedInstatnceState);
         if (data.getUserID() == "") {
-            setContentView(R.layout.activity_favourites_guest);
+            Intent ig = new Intent(nav.getContext(), favouritesGuest.class);
+            ig.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(ig);
         }
         else{
-            setContentView(R.layout.activity_favourites_loggedin);
+            Intent il = new Intent(nav.getContext(), favouritesLoggedIn.class);
+            il.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(il);
+
             imgLogo = (ImageView) findViewById(R.id.imgLogoTopRight);
             nav = findViewById(R.id.navigation);
 

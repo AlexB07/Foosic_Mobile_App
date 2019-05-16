@@ -17,6 +17,7 @@ public class LoginScreen extends AppCompatActivity {
     private TextInputLayout tilUsername;
     private TextInputLayout tilPassword;
     private loginSQL sqlLogin;
+    private appdatastorage data = new appdatastorage();
     private String result = "";
     private SoundbiteNavigationView nav;
 
@@ -88,6 +89,8 @@ public class LoginScreen extends AppCompatActivity {
         }
         if (!result.equals("")) {
             Toast.makeText(getApplicationContext(), "User signed", Toast.LENGTH_SHORT).show();
+            data.setUserID(s);
+            
         } else {
             Toast.makeText(getApplicationContext(), "User denied", Toast.LENGTH_SHORT).show();
         }
