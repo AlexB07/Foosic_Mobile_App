@@ -1,6 +1,7 @@
 package com.bartram.uk_alexander.ac.yorksj.foosicapp;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,8 +16,7 @@ public class LoginScreen extends AppCompatActivity {
     private Button btnSubmit;
     private TextInputLayout tilUsername;
     private TextInputLayout tilPassword;
-    private loginSQL sqlLogin = new loginSQL();
-    private appdatastorage data = new appdatastorage();
+    private loginSQL sqlLogin;
     private String result = "";
     private SoundbiteNavigationView nav;
 
@@ -25,18 +25,14 @@ public class LoginScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
-
+        sqlLogin = new loginSQL();
         nav = findViewById(R.id.navigation);
 
         imgLogo = (ImageView) findViewById(R.id.imgLogoTopRight);
-     tilUsername = (TextInputLayout) findViewById(R.id.textInputLayout);
-     tilPassword = (TextInputLayout) findViewById(R.id.txtInputPassword);
-      tilUsername.setHint("Email Address");
-       tilPassword.setHint("Password");
-
-
-        sqlLogin.parent = this;
-
+        tilUsername = (TextInputLayout) findViewById(R.id.textInputLayout);
+        tilPassword = (TextInputLayout) findViewById(R.id.txtInputPassword);
+        tilUsername.setHint("Email Address");
+        tilPassword.setHint("Password");
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
 
         imgLogo.setOnClickListener(new View.OnClickListener() {
@@ -51,18 +47,16 @@ public class LoginScreen extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               String username = tilUsername.getEditText().getText().toString();
-               String password = tilPassword.getEditText().getText().toString();
+                if (sqlLogin.getStatus() == AsyncTask.Status.PENDING || sqlLogin.getStatus() == AsyncTask.Status.FINISHED) {
+                    sqlLogin = new loginSQL();
+                    sqlLogin.parent = LoginScreen.this;
+                    String username = tilUsername.getEditText().getText().toString();
+                    String password = tilPassword.getEditText().getText().toString();
 
-               sqlLogin.execute(username, password);
+                    sqlLogin.execute(username, password);
 
-               data.setUserID(username);
-
-               if (!result.equals("")){
-                   Toast.makeText(getApplicationContext(), "User signed", Toast.LENGTH_SHORT).show();
-               }else {
-                    Toast.makeText(getApplicationContext(), "User denied", Toast.LENGTH_SHORT).show();
-               }
+                    Toast.makeText(getApplicationContext(), "Checking...", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -81,8 +75,10 @@ public class LoginScreen extends AppCompatActivity {
 
 
     public void loginSuccessful(String s){
+        String temp = "";
         try {
-            if (Integer.parseInt(s) > 0) {
+            temp = s.replaceAll("\\s+","");
+            if (Integer.parseInt(temp) > 0) {
                 result = s;
             }
         }catch (NumberFormatException e){
@@ -90,5 +86,12 @@ public class LoginScreen extends AppCompatActivity {
             e.printStackTrace();
 
         }
+        if (!result.equals("")) {
+            Toast.makeText(getApplicationContext(), "User signed", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "User denied", Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 }
