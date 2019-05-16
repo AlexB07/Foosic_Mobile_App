@@ -25,7 +25,7 @@ public class homeScreenLoggedIn extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.btnLogin);
         txtWelcome = (TextView) findViewById(R.id.txtWelcome);
 
-        txtWelcome.setText("Welcome back " + data.getUserID());
+        //txtWelcome.setText("Welcome back " + data.getUserID());
 
         imgLogo.setOnClickListener(new View.OnClickListener() {
             @Override

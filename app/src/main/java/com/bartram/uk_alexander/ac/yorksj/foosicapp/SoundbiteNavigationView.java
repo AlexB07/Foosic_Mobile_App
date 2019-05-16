@@ -13,6 +13,7 @@ import android.view.MenuItem;
 public class SoundbiteNavigationView extends BottomNavigationView {
 
     private Context c;
+    private appdatastorage data = new appdatastorage();
 
     public SoundbiteNavigationView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
@@ -44,10 +45,18 @@ public class SoundbiteNavigationView extends BottomNavigationView {
                     ((Activity) getContext()).overridePendingTransition(0,0);
                     return true;
                 case R.id.navigation_favourites:
-                    Intent fav = new Intent(getContext(), favouritesGuest.class);
-                    fav.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                    getContext().startActivity(fav);
-                    ((Activity) getContext()).overridePendingTransition(0,0);
+                    if (data.getLogInStatus() == false) {
+                        Intent fav = new Intent(getContext(), favouritesGuest.class);
+                        fav.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                        getContext().startActivity(fav);
+                        ((Activity) getContext()).overridePendingTransition(0,0);
+                    }
+                    else{
+                        Intent fav = new Intent(getContext(), favouritesLoggedIn.class);
+                        fav.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                        getContext().startActivity(fav);
+                        ((Activity) getContext()).overridePendingTransition(0,0);
+                    }
                     return true;
                 case R.id.navigation_food:
                     Intent food = new Intent(getContext(), foodScreen.class);

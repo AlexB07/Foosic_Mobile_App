@@ -10,32 +10,26 @@ import android.widget.ImageView;
 public class favouritesLoggedIn extends AppCompatActivity {
     private ImageView imgLogo;
     private SoundbiteNavigationView nav;
-    private appdatastorage data = new appdatastorage();
 
     protected void onCreate(Bundle savedInstatnceState){
         super.onCreate(savedInstatnceState);
-        if (data.getLogInStatus() == false) {
-            Intent ig = new Intent(nav.getContext(), favouritesGuest.class);
-            ig.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            startActivity(ig);
-        }
-        else{
-            Intent il = new Intent(nav.getContext(), favouritesLoggedIn.class);
-            il.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            startActivity(il);
+        setContentView(R.layout.activity_favourites_loggedin);
 
-            imgLogo = (ImageView) findViewById(R.id.imgLogoTopRight);
-            nav = findViewById(R.id.navigation);
+        Intent il = new Intent(nav.getContext(), favouritesLoggedIn.class);
+        il.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(il);
 
-            imgLogo.setOnClickListener((new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent i = new Intent(v.getContext(), homeScreenGuest.class);
-                    i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                    startActivity(i);
-                }
-            }));
-        }
+        imgLogo = (ImageView) findViewById(R.id.imgLogoTopRight);
+        nav = findViewById(R.id.navigation);
+
+        imgLogo.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), homeScreenGuest.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(i);
+            }
+        }));
     }
     public void onStart(){
         super.onStart();
