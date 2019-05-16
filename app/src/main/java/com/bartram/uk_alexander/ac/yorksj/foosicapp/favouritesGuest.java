@@ -19,7 +19,7 @@ public class favouritesGuest extends AppCompatActivity {
     protected void onCreate(Bundle savedInstatnceState){
         super.onCreate(savedInstatnceState);
 
-        if (data.getUserID() != "") {
+        if (data.getLogInStatus() == true) {
             Intent il = new Intent(nav.getContext(), favouritesLoggedIn.class);
             il.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(il);

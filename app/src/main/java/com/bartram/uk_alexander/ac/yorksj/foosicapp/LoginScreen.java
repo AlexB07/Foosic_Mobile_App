@@ -89,7 +89,7 @@ public class LoginScreen extends AppCompatActivity {
         }
         if (!result.equals("")) {
             Toast.makeText(getApplicationContext(), "User signed", Toast.LENGTH_SHORT).show();
-            data.setUserID(s);
+            data.setLoggedIn(true);
             
         } else {
             Toast.makeText(getApplicationContext(), "User denied", Toast.LENGTH_SHORT).show();

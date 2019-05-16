@@ -1,15 +1,15 @@
 package com.bartram.uk_alexander.ac.yorksj.foosicapp;
 
 public class appdatastorage {
-    public String loggedInUser = "";
+    public Boolean logIn = false;
 
-    public String setUserID(String user) {
-        loggedInUser = user;
-        return loggedInUser;
+    public Boolean getLogInStatus() {
+        return logIn;
     }
 
-    public String getUserID() {
-        return loggedInUser;
+    public Boolean setLoggedIn(Boolean b){
+        logIn = b;
+        return logIn;
     }
 
 }
