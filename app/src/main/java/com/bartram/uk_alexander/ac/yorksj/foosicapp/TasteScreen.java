@@ -20,12 +20,14 @@ public class TasteScreen extends AppCompatActivity {
     private findSong song;
     public int sweetSour;
 
+    private SoundbiteNavigationView nav;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_taste_screen);
-
+        nav = findViewById(R.id.navigation);
 
         //Initialise spinners
         String[] spinnerArray = new String[]{"0", "1", "2", "3", "4", "5"};
@@ -87,6 +89,11 @@ public class TasteScreen extends AppCompatActivity {
         });
 
 
+    }
+
+    public void onStart(){
+        super.onStart();
+        nav.setSelectedItemId(R.id.navigation_taste);
     }
 
     public void resetValues() {

@@ -18,7 +18,10 @@
     <string name="noAccount">Haven\&#39;t got an account? Click Here</string>
     <string name="forgotPassword">Forgot your password? Click Here</string>
     <string name="btnSubmit">Submit</string>
-
+    <string name="firstName">First Name:</string>
+    <string name="email">Email: </string>
+    <string name="ageText">Age: </string>
+    <string name="btnCancel">Cancel</string>
     <string-array name="string_array_breakfast">
         <item>Cereal</item>
         <item>Toast</item>

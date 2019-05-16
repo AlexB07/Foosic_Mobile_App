@@ -145,5 +145,15 @@
         app:layout_constraintTop_toBottomOf="@+id/spinnerBitter" />
 
 
+    <com.bartram.uk_alexander.ac.yorksj.foosicapp.SoundbiteNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/navigation" />
+
+
 
 </android.support.constraint.ConstraintLayout>

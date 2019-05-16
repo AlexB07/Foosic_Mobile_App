@@ -3,6 +3,8 @@ package com.bartram.uk_alexander.ac.yorksj.foosicapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListAdapter;
@@ -19,6 +21,7 @@ public class foodScreen extends AppCompatActivity {
 
     private ImageView imgLogo;
     private ImageView imgSettings;
+    private SoundbiteNavigationView nav;
 
     private ExpandableListView expandableListView;
 
@@ -30,6 +33,10 @@ public class foodScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_screen);
+        nav = findViewById(R.id.navigation);
+
+
+
 
 
         initViews();
@@ -191,6 +198,10 @@ public class foodScreen extends AppCompatActivity {
         explistAdapter.notifyDataSetChanged();
     }
 
+    public void onStart() {
+        super.onStart();
+        nav.setSelectedItemId(R.id.navigation_food);
+    }
 
 }
 

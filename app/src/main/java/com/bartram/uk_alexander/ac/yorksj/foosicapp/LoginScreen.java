@@ -17,12 +17,15 @@ public class LoginScreen extends AppCompatActivity {
     private TextInputLayout tilPassword;
     private loginSQL sqlLogin = new loginSQL();
     private String result = "";
+    private SoundbiteNavigationView nav;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
+
+        nav = findViewById(R.id.navigation);
 
         imgLogo = (ImageView) findViewById(R.id.imgLogoTopRight);
      tilUsername = (TextInputLayout) findViewById(R.id.textInputLayout);
@@ -66,6 +69,12 @@ public class LoginScreen extends AppCompatActivity {
 
 
     }
+
+    public void onStart(){
+        super.onStart();
+
+    }
+
 
 
     public void loginSuccessful(String s){

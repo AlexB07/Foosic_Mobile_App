@@ -12,13 +12,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".breakfastMenu"></activity>
-        <activity android:name=".foodScreen"
+        <activity android:name=".musicPlayer"></activity>
+        <activity android:name=".favouritesGuest" />
+        <activity android:name=".creatingAccount" />
+        <activity android:name=".breakfastMenu" />
+        <activity
+            android:name=".foodScreen"
             android:screenOrientation="portrait" />
-            />
-        <activity android:name=".TasteScreen"
+        <activity
+            android:name=".TasteScreen"
             android:screenOrientation="portrait" />
-            />
         <activity
             android:name=".LoginScreen"
             android:screenOrientation="portrait" />
