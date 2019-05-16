@@ -12,7 +12,6 @@ import android.widget.ImageView;
 
 public class homeScreenGuest extends AppCompatActivity {
 
-
     private ImageView imgLogo;
     private Button btnLogin;
     private SoundbiteNavigationView nav;
