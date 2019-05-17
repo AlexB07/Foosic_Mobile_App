@@ -100,7 +100,7 @@ public class statsSQL extends AsyncTask<String, Void, String> {
         super.onPostExecute(s);
         String test = s;
 
-        parent.loginSuccessful(s);
+        //parent.loginSuccessful(s);
 
 
     }
