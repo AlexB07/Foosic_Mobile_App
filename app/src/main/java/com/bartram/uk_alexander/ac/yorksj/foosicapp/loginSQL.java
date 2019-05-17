@@ -20,7 +20,7 @@ import java.util.HashMap;
 
 public class loginSQL extends AsyncTask<String, Void, String> {
 
-        public LoginScreen parent;
+    public LoginScreen parent;
     @Override
     protected String doInBackground(String... strings) {
 

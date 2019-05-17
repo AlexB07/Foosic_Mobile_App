@@ -55,6 +55,7 @@ public class LoginScreen extends AppCompatActivity {
                     String password = tilPassword.getEditText().getText().toString();
 
                     sqlLogin.execute(username, password);
+                    data.setUser(username);
 
                     Toast.makeText(getApplicationContext(), "Checking...", Toast.LENGTH_SHORT).show();
                 }

@@ -15,7 +15,7 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 
 public class favouritesSQL extends AsyncTask<String, Void, String> {
-    public homeScreenLoggedIn parent;
+    public favouritesLoggedIn parent;
     @Override
     protected String doInBackground(String... strings) {
 
@@ -89,7 +89,7 @@ public class favouritesSQL extends AsyncTask<String, Void, String> {
         super.onPostExecute(s);
         String test = s;
 
-        //parent.loginSuccessful(s);
+        parent.faves(s);
 
     }
 }
