@@ -12,10 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".musicPlayer"></activity>
+        <activity android:name=".musicPlayer"> </activity>
         <activity android:name=".favouritesGuest" />
         <activity android:name=".creatingAccount" />
         <activity android:name=".breakfastMenu" />
+        <activity android:name=".favouritesLoggedIn" />
+        <activity android:name=".homeScreenLoggedIn" />
         <activity
             android:name=".foodScreen"
             android:screenOrientation="portrait" />

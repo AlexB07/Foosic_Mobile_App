@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,7 +18,7 @@ public class LoginScreen extends AppCompatActivity {
     private TextInputLayout tilUsername;
     private TextInputLayout tilPassword;
     private loginSQL sqlLogin;
-    private appdatastorage data = new appdatastorage();
+    static appdatastorage data = new appdatastorage();
     private String result = "";
     private SoundbiteNavigationView nav;
 
@@ -60,20 +61,12 @@ public class LoginScreen extends AppCompatActivity {
                 }
             }
         });
-
-
-
-
-
-
     }
 
     public void onStart(){
         super.onStart();
 
     }
-
-
 
     public void loginSuccessful(String s){
         String temp = "";
@@ -90,11 +83,10 @@ public class LoginScreen extends AppCompatActivity {
         if (!result.equals("")) {
             Toast.makeText(getApplicationContext(), "User signed", Toast.LENGTH_SHORT).show();
             data.setLoggedIn(true);
-            
+
         } else {
             Toast.makeText(getApplicationContext(), "User denied", Toast.LENGTH_SHORT).show();
         }
-
 
     }
 }

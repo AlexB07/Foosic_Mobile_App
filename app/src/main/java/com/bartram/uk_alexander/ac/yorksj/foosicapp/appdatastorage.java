@@ -4,12 +4,12 @@ public class appdatastorage {
     public Boolean logIn = false;
 
     public Boolean getLogInStatus() {
+
         return logIn;
     }
 
-    public Boolean setLoggedIn(Boolean b){
+    public void setLoggedIn(Boolean b){
         logIn = b;
-        return logIn;
     }
 
 }

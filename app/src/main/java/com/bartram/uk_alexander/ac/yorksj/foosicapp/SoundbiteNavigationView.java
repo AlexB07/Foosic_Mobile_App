@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,7 +12,6 @@ import android.view.MenuItem;
 public class SoundbiteNavigationView extends BottomNavigationView {
 
     private Context c;
-    private appdatastorage data = new appdatastorage();
 
     public SoundbiteNavigationView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
@@ -44,18 +42,21 @@ public class SoundbiteNavigationView extends BottomNavigationView {
                     getContext().startActivity(music);
                     ((Activity) getContext()).overridePendingTransition(0,0);
                     return true;
+
                 case R.id.navigation_favourites:
-                    if (data.getLogInStatus() == false) {
-                        Intent fav = new Intent(getContext(), favouritesGuest.class);
-                        fav.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        getContext().startActivity(fav);
+                    Boolean test = LoginScreen.data.getLogInStatus();
+                    if (test == false) {
+                        Intent fav1 = new Intent(getContext(), favouritesGuest.class);
+                        fav1.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                        getContext().startActivity(fav1);
                         ((Activity) getContext()).overridePendingTransition(0,0);
                     }
-                    else{
+                    if (test == true) {
                         Intent fav = new Intent(getContext(), favouritesLoggedIn.class);
                         fav.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         getContext().startActivity(fav);
                         ((Activity) getContext()).overridePendingTransition(0,0);
+
                     }
                     return true;
                 case R.id.navigation_food:
@@ -65,7 +66,6 @@ public class SoundbiteNavigationView extends BottomNavigationView {
                     ((Activity) getContext()).overridePendingTransition(0,0);
                     return true;
             }
-
             return false;
         }
     };
@@ -76,8 +76,4 @@ public class SoundbiteNavigationView extends BottomNavigationView {
         menuItem.setChecked(true);
 
     }
-
-
-
-
 }
