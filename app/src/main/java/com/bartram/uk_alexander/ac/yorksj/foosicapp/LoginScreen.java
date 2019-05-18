@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import android.widget.Toast;
 
 public class LoginScreen extends Fragment {
 
-    private Button btnSubmit;
+    private Button button;
     private TextInputLayout tilUsername;
     private TextInputLayout tilPassword;
     private loginSQL sqlLogin = new loginSQL();
@@ -32,17 +33,39 @@ public class LoginScreen extends Fragment {
         tilPassword = view.findViewById(R.id.txtInputPassword);
         tilUsername.setHint("Email Address");
         tilPassword.setHint("Password");
-
+        button = (Button) view.findViewById(R.id.btnSubmit);
         sqlLogin.parent = this;
 
 
+        button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(),"works", Toast.LENGTH_SHORT);
+                Log.d("TESTING", "  test");
+                String username = tilUsername.getEditText().getText().toString();
+                String password = tilPassword.getEditText().getText().toString();
+
+                sqlLogin.execute(username, password);
+
+                if (!result.equals("")){
+                    Toast.makeText(getActivity(), "User signed", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(getActivity(), "User denied", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
 
 
             return view;
     }
 
-    public void onClick(View v){
+
+
+
+
+    /*public void onClick(View v){
         switch (v.getId()){
             case R.id.btnSubmit:
                 String username = tilUsername.getEditText().getText().toString();
@@ -60,7 +83,7 @@ public class LoginScreen extends Fragment {
 
         }
 
-    }
+    }*/
 
     public void loginSuccessful(String s){
         try {

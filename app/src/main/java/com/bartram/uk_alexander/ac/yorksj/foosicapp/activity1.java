@@ -35,7 +35,7 @@ public class activity1 extends AppCompatActivity {
                     //mTextMessage.setText("home");
                     return true;
                 case R.id.navigation_taste:
-                    Fragment fragment2 = new TasteFragment();
+                    Fragment fragment2 = new TasteScreen();
                     moveToFragment(fragment2);
                     //mTextMessage.setText("taste");
                     return true;
