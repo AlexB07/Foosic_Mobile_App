@@ -1,6 +1,7 @@
 package com.bartram.uk_alexander.ac.yorksj.foosicapp;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -41,7 +42,7 @@ public class favouritesSQL extends AsyncTask<String, Void, String> {
         }
 
         try {
-            url = new URL("https://cs2s.yorkdc.net/~george.causer/favourites.php");
+            url = new URL("https://cs2s.yorkdc.net/~alexander.bartram/fav.php");
             conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
@@ -88,6 +89,9 @@ public class favouritesSQL extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         String test = s;
+        Log.d("test",s);
+        Log.d("test",s);
+
 
         parent.faves(s);
 
