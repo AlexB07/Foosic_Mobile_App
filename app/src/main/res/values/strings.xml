@@ -15,8 +15,9 @@
     <string name="textUsername">Email Address</string>
     <string name="passwordLabel">Password: </string>
     <string name="textPassword">Password</string>
-    <string name="noAccount">Haven\&#39;t got an account? Click Here</string>
-    <string name="forgotPassword">Forgot your password? Click Here</string>
+    <string name="noAccount">Haven\&#39;t got an account?</string>
+    <string name="forgotPassword">Forgot your password?</string>
+    <string name="clickhere">Click Here</string>
     <string name="btnSubmit">Submit</string>
     <string name="firstName">First Name:</string>
     <string name="email">Email: </string>

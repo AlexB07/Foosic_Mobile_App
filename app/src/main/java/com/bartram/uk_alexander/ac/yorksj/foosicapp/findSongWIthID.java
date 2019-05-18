@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
@@ -16,9 +15,9 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
 
-public class findSong extends AsyncTask <String, Void, byte[]> {
+public class findSongWIthID extends AsyncTask<String, Void, byte[]> {
 
-    public TasteScreen parent;
+    public foodScreen parent;
 
     @Override
     protected byte[] doInBackground(String... strings) {
@@ -30,12 +29,8 @@ public class findSong extends AsyncTask <String, Void, byte[]> {
 
 
         HashMap<String, String> params = new HashMap<String, String>();
-        params.put("sweet",strings[0]);
-        params.put("sour", strings[1]);
-        params.put("salty",strings[2]);
-        params.put("bitter", strings[3]);
+        params.put("songID",strings[0]);
         StringBuilder sbParams = new StringBuilder();
-        Log.d("var", ""+strings[0]+strings[1]+strings[2]+strings[3]);
         int i = 0;
         for (String key : params.keySet()){
             try {
@@ -50,7 +45,7 @@ public class findSong extends AsyncTask <String, Void, byte[]> {
         }
 
         try {
-            url = new URL("https://cs2s.yorkdc.net/~alexander.bartram/findSong.php");
+            url = new URL("https://cs2s.yorkdc.net/~alexander.bartram/findSongWithID.php");
             conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
@@ -98,17 +93,13 @@ public class findSong extends AsyncTask <String, Void, byte[]> {
         return result;
     }
 
-
     @Override
     protected void onPostExecute(byte[] s) {
         super.onPostExecute(s);
-        byte[] test = s; //Tesing debugging statement
-        parent.testingSongOutput(s);
+        parent.results(s);
 
 
 
     }
-
-
 
 }

@@ -1,8 +1,10 @@
 package com.bartram.uk_alexander.ac.yorksj.foosicapp;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,6 +21,10 @@ public class TasteScreen extends AppCompatActivity {
     private SeekBar sbSweetSour;
     private findSong song;
     public int sweetSour;
+
+    private Intent music;
+
+    private Byte[] test;
 
     private SoundbiteNavigationView nav;
 
@@ -79,10 +85,21 @@ public class TasteScreen extends AppCompatActivity {
                         sweet = "1";
                     }
 
-                    salty = spSalty.getSelectedItem().toString();
-                    bitter = spBitter.getSelectedItem().toString();
+                    if (Integer.parseInt(spSalty.getSelectedItem().toString()) > 0){
+                        salty = "1";
+                    }else {
+                        salty = "0";
+                    }
+
+                    if (Integer.parseInt(spBitter.getSelectedItem().toString()) > 0){
+                        bitter = "1";
+                    }else {
+                        bitter = "0";
+                    }
+
 
                     song.execute(sweet, sour, salty, bitter);
+
                 }
 
             }
@@ -93,6 +110,7 @@ public class TasteScreen extends AppCompatActivity {
 
     public void onStart(){
         super.onStart();
+        musicPlayer.mediaPlayer.pause();
         nav.setSelectedItemId(R.id.navigation_taste);
     }
 
@@ -109,15 +127,14 @@ public class TasteScreen extends AppCompatActivity {
         sweetSour = (sweetSour / 10) + 1;
     }
 
-    public void testingSongOutput(String s) {
+    public void testingSongOutput(byte[] s) {
         String songID = "";
-        String song = "";
+        byte[] song = new byte[s.length];
+        song = s;
 
         try {
-            String[] results = s.split("!");
 
-            songID = results[0];
-            song = results[1];
+
         } catch (ArrayIndexOutOfBoundsException e) {
             Toast.makeText(getApplicationContext(), "APP [WIP]", Toast.LENGTH_SHORT).show();
         }
@@ -126,6 +143,19 @@ public class TasteScreen extends AppCompatActivity {
         if (!songID.isEmpty()) {
             Toast.makeText(getApplicationContext(), "Completed song ID" + songID, Toast.LENGTH_SHORT).show();
         }
+
+        music = new Intent(TasteScreen.this, musicPlayer.class);
+        music.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        music.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        //music.putExtra("song_ID",songID);
+        Log.e("mp3", "putting " + song.length);
+        music.putExtra("songFile",song);
+        startActivity(music);
+        music.putExtra("songFile",0);
+
+
+        overridePendingTransition(0,0);
+
     }
 
 

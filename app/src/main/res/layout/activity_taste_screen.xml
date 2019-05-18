@@ -7,7 +7,7 @@
     android:background="#ff5b00"
     tools:context=".TasteScreen">
 
-    <ImageView
+    <com.bartram.uk_alexander.ac.yorksj.foosicapp.ImgLogo
         android:id="@+id/imgLogoTopRight"
         android:layout_width="71dp"
         android:layout_height="62dp"
@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <com.bartram.uk_alexander.ac.yorksj.foosicapp.ImgSettings
         android:id="@+id/imgSettings"
         android:layout_width="50dp"
         android:layout_height="53dp"

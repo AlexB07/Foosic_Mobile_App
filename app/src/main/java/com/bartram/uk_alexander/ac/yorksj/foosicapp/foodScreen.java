@@ -1,6 +1,7 @@
 package com.bartram.uk_alexander.ac.yorksj.foosicapp;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,15 +20,17 @@ import java.util.List;
 public class foodScreen extends AppCompatActivity {
 
 
-    private ImageView imgLogo;
     private ImageView imgSettings;
     private SoundbiteNavigationView nav;
+
+    private Intent music;
 
     private ExpandableListView expandableListView;
 
     private ExpandableListViewAdpter explistAdapter;
     private List<String> listViewGroup;
     private HashMap<String, String[][]> listViewChid;
+    private findSongWIthID song = new findSongWIthID();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,25 +39,13 @@ public class foodScreen extends AppCompatActivity {
         nav = findViewById(R.id.navigation);
 
 
-
-
-
         initViews();
         initListeners();
         initObjects();
         initListData();
 
-        imgLogo = findViewById(R.id.imgLogoTopRight);
-        imgSettings = findViewById(R.id.imgSettings);
 
-        imgLogo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), homeScreenGuest.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(i);
-            }
-        });
+        imgSettings = findViewById(R.id.imgSettings);
 
         imgSettings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +80,16 @@ public class foodScreen extends AppCompatActivity {
                                 + listViewChid.get(
                                 listViewGroup.get(groupPosition))[childPosition][1], Toast.LENGTH_SHORT)
                         .show();
+                musicPlayer.mediaPlayer.pause();
+                if (song.getStatus() == AsyncTask.Status.PENDING || song.getStatus() == AsyncTask.Status.FINISHED) {
+                    song = new findSongWIthID();
+                    song.parent = foodScreen.this;
+
+                    String tempInput = listViewChid.get(listViewGroup.get(groupPosition))[childPosition][1].toString();
+
+                    song.execute(tempInput);
+                }
+
                 return false;
             }
         });
@@ -153,10 +154,10 @@ public class foodScreen extends AppCompatActivity {
         String[][] breakfastList = new String[3][2];
         //Intitalising the breakfast list
         breakfastList[0][0] = "Cereal";
-        breakfastList[0][1] = "1";
+        breakfastList[0][1] = "6";
 
         breakfastList[1][0] = "Toast";
-        breakfastList[1][1] = "1";
+        breakfastList[1][1] = "4";
 
         breakfastList[2][0] = "Fruit";
         breakfastList[2][1] = "1";
@@ -165,25 +166,25 @@ public class foodScreen extends AppCompatActivity {
         String[][] lunchList = new String[3][2];
         //Intitalising the breakfast list
         lunchList[0][0] = "Pasta";
-        lunchList[0][1] = "1";
+        lunchList[0][1] = "2";
 
         lunchList[1][0] = "Sandwiches";
-        lunchList[1][1] = "1";
+        lunchList[1][1] = "3";
 
         lunchList[2][0] = "Salad";
-        lunchList[2][1] = "1";
+        lunchList[2][1] = "0";
 
         // list for Dinner
         String[][] dinnerList = new String[3][2];
         //Intitalising the breakfast list
         dinnerList[0][0] = "Pizza";
-        dinnerList[0][1] = "1";
+        dinnerList[0][1] = "6";
 
         dinnerList[1][0] = "Curry";
-        dinnerList[1][1] = "1";
+        dinnerList[1][1] = "3";
 
         dinnerList[2][0] = "Chicken";
-        dinnerList[2][1] = "1";
+        dinnerList[2][1] = "5";
 
 
         // Adding child data
@@ -202,6 +203,20 @@ public class foodScreen extends AppCompatActivity {
         super.onStart();
         nav.setSelectedItemId(R.id.navigation_food);
     }
+
+    public void results(byte[] b) {
+        byte[] song = b;
+
+        music = new Intent(this, musicPlayer.class);
+        music.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        music.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        music.putExtra("songFile", song);
+        startActivity(music);
+        music.putExtra("songFile", 0);
+
+
+    }
+
 
 }
 

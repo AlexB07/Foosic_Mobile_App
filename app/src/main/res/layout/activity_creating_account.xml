@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFA500"
+    android:background="#FF5b00"
     tools:context=".creatingAccount">
 
-    <ImageView
+    <com.bartram.uk_alexander.ac.yorksj.foosicapp.ImgLogo
         android:id="@+id/imgLogoTopRight"
         android:contentDescription="@string/Logo"
         android:layout_width="71dp"
@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <com.bartram.uk_alexander.ac.yorksj.foosicapp.ImgSettings
         android:id="@+id/imgSettings"
         android:contentDescription="@string/Settings"
         android:layout_width="50dp"
@@ -58,22 +58,21 @@
         app:layout_constraintTop_toBottomOf="@+id/imgSettings" />
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout"
-        android:layout_width="395dp"
+        android:id="@+id/txtInputName"
+        android:layout_width="362dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.363"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtFirstName">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/txtInputFirstname"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="text" />
     </android.support.design.widget.TextInputLayout>
 
     <TextView
@@ -89,24 +88,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/txtInputName" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/txtInputEmail"
-        android:layout_width="395dp"
-        android:layout_height="wrap_content"
+        android:layout_width="354dp"
+        android:layout_height="55dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtEmail">
 
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress" />
     </android.support.design.widget.TextInputLayout>
 
     <TextView
@@ -155,20 +152,19 @@
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/txtInputPassword"
-        android:layout_width="395dp"
+        android:layout_width="357dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.363"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPassword">
 
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
 
     <Button

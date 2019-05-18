@@ -7,7 +7,7 @@
     android:background="#FF5b00"
     tools:context=".LoginScreen">
 
-    <ImageView
+    <com.bartram.uk_alexander.ac.yorksj.foosicapp.ImgLogo
         android:id="@+id/imgLogoTopRight"
         android:contentDescription="@string/Logo"
         android:layout_width="71dp"
@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <com.bartram.uk_alexander.ac.yorksj.foosicapp.ImgSettings
         android:id="@+id/imgSettings"
         android:contentDescription="@string/Settings"
         android:layout_width="50dp"
@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imgLogoTopRight" />
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout"
+        android:id="@+id/txtInputName"
         android:layout_width="340dp"
         android:layout_height="54dp"
         android:layout_marginStart="8dp"
@@ -72,7 +72,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/txtInputName" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/txtInputPassword"
@@ -90,8 +90,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/textPassword"
-            android:inputType="textPassword"
-            />
+            android:inputType="textPassword" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -146,6 +145,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/navigation" />
 
+    <TextView
+        android:id="@+id/txtCreateAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/clickhere"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.99"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtInputPassword" />
 
 
 </android.support.constraint.ConstraintLayout>

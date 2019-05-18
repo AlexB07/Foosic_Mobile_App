@@ -11,25 +11,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 public class favouritesGuest extends AppCompatActivity {
-    private ImageView imgLogo;
+
     private Button btnLogin;
     private SoundbiteNavigationView nav;
 
-    protected void onCreate(Bundle savedInstatnceState){
+    protected void onCreate(Bundle savedInstatnceState) {
         super.onCreate(savedInstatnceState);
         setContentView(R.layout.activity_favourites_guest);
-        imgLogo = (ImageView) findViewById(R.id.imgLogoTopRight);
+
         btnLogin = (Button) findViewById(R.id.btnFavLogin);
         nav = findViewById(R.id.navigation);
 
-        imgLogo.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), homeScreenGuest.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(i);
-            }
-        }));
         btnLogin.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,7 +31,8 @@ public class favouritesGuest extends AppCompatActivity {
             }
         }));
     }
-    public void onStart(){
+
+    public void onStart() {
         super.onStart();
         nav.setSelectedItemId(R.id.navigation_favourites);
     }

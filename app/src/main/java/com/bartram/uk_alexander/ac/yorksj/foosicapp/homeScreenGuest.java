@@ -13,7 +13,7 @@ import android.widget.ImageView;
 public class homeScreenGuest extends AppCompatActivity {
 
 
-    private ImageView imgLogo;
+    private ImgLogo imgLogo;
     private Button btnLogin;
     private SoundbiteNavigationView nav;
     public homeScreenGuest parent;
@@ -24,18 +24,18 @@ public class homeScreenGuest extends AppCompatActivity {
         setContentView(R.layout.activity_home_screen_guest);
 
 
-        imgLogo = (ImageView) findViewById(R.id.imgLogoTopRight);
+        imgLogo =  findViewById(R.id.imgLogoTopRight);
         btnLogin = (Button) findViewById(R.id.btnLogin);
 
 
-        imgLogo.setOnClickListener(new View.OnClickListener() {
+       /* imgLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), foodScreen.class);
+                Intent i = new Intent(v.getContext(), homeScreenGuest.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }
-        });
+        });*/
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
