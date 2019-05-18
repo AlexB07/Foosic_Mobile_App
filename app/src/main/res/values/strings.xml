@@ -23,6 +23,15 @@
     <string name="email">Email: </string>
     <string name="ageText">Age: </string>
     <string name="btnCancel">Cancel</string>
+    <string name="nameError">(!) Name Is Mandatory</string>
+    <string name="blank"></string>
+    <string name="hintName">Steve</string>
+    <string name="hintEmail">Steve@example.co.uk</string>
+    <string name="hintPassword">*********</string>
+    <string name="emailError">(!) Email Is Mandatory</string>
+    <string name="emailPattern">(!) Valid Email Required</string>
+    <string name="passwordError">(!) Password length needs to be greater than 8 characters long</string>
+    <string name="passwordEmpty">(!) Enter Password</string>
     <string-array name="string_array_breakfast">
         <item>Cereal</item>
         <item>Toast</item>

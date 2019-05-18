@@ -15,10 +15,9 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
 
-public class creatingAccountSQL extends AsyncTask<String, Void, String> {
+public class InsertFavSQL extends AsyncTask<String, Void, String> {
 
-    public creatingAccount parent;
-
+    public musicPlayer parent;
     @Override
     protected String doInBackground(String... strings) {
         URL url;
@@ -84,12 +83,13 @@ public class creatingAccountSQL extends AsyncTask<String, Void, String> {
                 conn.disconnect();
             }
         }
+
+
         return result;
     }
 
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        parent.accountCreationResult(s);
     }
 }
