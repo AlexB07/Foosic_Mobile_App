@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Orange"
+    tools:context=".homeScreenGuest">
+
+    <com.bartram.uk_alexander.ac.yorksj.foosicapp.ImgLogo
+        android:id="@+id/imgLogoTopRight"
+        android:contentDescription="@string/Logo"
+        android:layout_width="71dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_soundbitelogo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.bartram.uk_alexander.ac.yorksj.foosicapp.ImgSettings
+        android:id="@+id/imgSettings"
+        android:contentDescription="@string/Settings"
+        android:layout_width="50dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_settings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgName"
+        android:contentDescription="@string/nameLogo"
+        android:layout_width="367dp"
+        android:layout_height="220dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_soundbitetextlogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imgLogoTopRight" />
+
+
+    <com.bartram.uk_alexander.ac.yorksj.foosicapp.SoundbiteNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/navigation" />
+
+    <TextView
+        android:id="@+id/txtWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Welcome back"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgName"
+        app:layout_constraintVertical_bias="0.235" />
+
+</android.support.constraint.ConstraintLayout>

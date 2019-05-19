@@ -28,6 +28,8 @@ public class TasteScreen extends AppCompatActivity {
 
     private SoundbiteNavigationView nav;
 
+    private String songID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,6 +158,10 @@ public class TasteScreen extends AppCompatActivity {
 
         overridePendingTransition(0,0);
 
+    }
+
+    public void getSongID(String s){
+        songID = s;
     }
 
 

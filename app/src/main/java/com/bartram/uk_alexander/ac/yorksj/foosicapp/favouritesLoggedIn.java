@@ -34,6 +34,7 @@ public class favouritesLoggedIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstatnceState) {
         super.onCreate(savedInstatnceState);
         setContentView(R.layout.activity_favourites_logged_in);
+        listView = findViewById(R.id.list);
         favouritesSQL = new favouritesSQL();
         favouritesSQL.parent = favouritesLoggedIn.this;
         favouritesSQL.execute(Integer.toString(LoginScreen.userID));
@@ -58,12 +59,14 @@ public class favouritesLoggedIn extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         nav.setSelectedItemId(R.id.navigation_favourites);
+
+
     }
 
     public void faves(String s) {
         final HashMap<String, String> favOut = new HashMap<String, String>();
         HashMap<String, String> nameBlank = new HashMap<String, String>();
-        listView = findViewById(R.id.list);
+
         listView.setAdapter(null);
         if (!s.trim().isEmpty()) {
             String[] sArray = s.split(",");

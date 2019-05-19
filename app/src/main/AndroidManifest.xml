@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".settingScreen"></activity>
+        <activity android:name=".HomeScreenLoggedin"></activity>
+        <activity android:name=".favouritesLoggedIn" />
+        <activity android:name=".settingScreen" />
         <activity
             android:name=".musicPlayer"
             android:screenOrientation="portrait" />
