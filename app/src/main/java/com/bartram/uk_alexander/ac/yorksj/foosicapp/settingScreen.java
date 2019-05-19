@@ -63,7 +63,7 @@ public class settingScreen extends AppCompatActivity {
         btnPreferences.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             /*   Intent i = new Intent(v.getContext(), PreferencesPage.class);
+                Intent i = new Intent(v.getContext(), preferences.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
 */
