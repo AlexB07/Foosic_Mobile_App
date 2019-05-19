@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".statistics"></activity>
+        <activity android:name=".preferences"></activity>
+        <activity android:name=".statistics" />
         <activity android:name=".HomeScreenLoggedin" />
         <activity android:name=".favouritesLoggedIn" />
         <activity android:name=".settingScreen" />
