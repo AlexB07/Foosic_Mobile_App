@@ -30,6 +30,8 @@ public class favouritesLoggedIn extends AppCompatActivity {
     private findSongWithIDFavSQL song = new findSongWithIDFavSQL();
     private Intent music;
     private String item;
+    private HashMap<String, String> favOut = new HashMap<String, String>();
+
 
     protected void onCreate(Bundle savedInstatnceState) {
         super.onCreate(savedInstatnceState);
@@ -54,6 +56,7 @@ public class favouritesLoggedIn extends AppCompatActivity {
                 startActivity(i);
             }
         }));
+
     }
 
     public void onStart() {
@@ -64,7 +67,7 @@ public class favouritesLoggedIn extends AppCompatActivity {
     }
 
     public void faves(String s) {
-        final HashMap<String, String> favOut = new HashMap<String, String>();
+        favOut = new HashMap<String, String>();
         HashMap<String, String> nameBlank = new HashMap<String, String>();
 
         listView.setAdapter(null);

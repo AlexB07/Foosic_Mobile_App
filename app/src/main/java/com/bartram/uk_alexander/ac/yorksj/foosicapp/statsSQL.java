@@ -1,6 +1,7 @@
 package com.bartram.uk_alexander.ac.yorksj.foosicapp;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -80,7 +81,10 @@ public class statsSQL extends AsyncTask<String, Void, String> {
             while ((line = bufferedReader.readLine()) != null) {
                 res.append(line);
             }
+            Log.d("stats", "result from server "+res);
             return res.toString();
+
+
 
         } catch(IOException e){
             e.printStackTrace();
@@ -99,8 +103,9 @@ public class statsSQL extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         String test = s;
+        Log.d("test",s);
 
-        //parent.loginSuccessful(s);
+        parent.stats(s);
 
 
     }
