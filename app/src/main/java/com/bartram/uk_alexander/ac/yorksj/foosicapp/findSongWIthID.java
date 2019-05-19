@@ -29,16 +29,16 @@ public class findSongWIthID extends AsyncTask<String, Void, byte[]> {
 
 
         HashMap<String, String> params = new HashMap<String, String>();
-        params.put("songID",strings[0]);
+        params.put("songID", strings[0]);
         StringBuilder sbParams = new StringBuilder();
         int i = 0;
-        for (String key : params.keySet()){
+        for (String key : params.keySet()) {
             try {
                 if (i != 0) {
                     sbParams.append("&");
                 }
                 sbParams.append(key).append("=").append(URLEncoder.encode(params.get(key), "UTF-8"));
-            } catch (UnsupportedEncodingException e){
+            } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
             i++;
@@ -62,7 +62,7 @@ public class findSongWIthID extends AsyncTask<String, Void, byte[]> {
             ds.writeBytes(paramsString);
             ds.flush();
             ds.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -74,18 +74,18 @@ public class findSongWIthID extends AsyncTask<String, Void, byte[]> {
             byte[] data = new byte[50];
             int current = 0;
 
-            while ((current = is.read(data,0,data.length)) != -1) {
-                buffer.write(data,0,current);
+            while ((current = is.read(data, 0, data.length)) != -1) {
+                buffer.write(data, 0, current);
             }
 
             result = buffer.toByteArray();
 
             Log.d("findSong", "result from server: " + buffer.toString());
             //return test;
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
-        }finally {
-            if (conn != null){
+        } finally {
+            if (conn != null) {
                 conn.disconnect();
             }
         }
@@ -97,7 +97,6 @@ public class findSongWIthID extends AsyncTask<String, Void, byte[]> {
     protected void onPostExecute(byte[] s) {
         super.onPostExecute(s);
         parent.results(s);
-
 
 
     }
