@@ -17,6 +17,7 @@
         <activity android:name=".HomeScreenLoggedin" />
         <activity android:name=".favouritesLoggedIn" />
         <activity android:name=".settingScreen" />
+        <activity android:name=".preferences" />
         <activity
             android:name=".musicPlayer"
             android:screenOrientation="portrait" />
