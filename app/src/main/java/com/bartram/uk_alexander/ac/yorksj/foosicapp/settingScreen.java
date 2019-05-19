@@ -22,10 +22,10 @@ public class settingScreen extends AppCompatActivity {
         btnStatistics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-           /*     Intent i = new Intent(v.getContext(), Statistics.class);
+                Intent i = new Intent(v.getContext(), statistics.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
-*/
+
             }
         });
 

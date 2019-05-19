@@ -25,7 +25,7 @@ import java.util.Map;
 public class favouritesLoggedIn extends AppCompatActivity {
     private ImageView imgLogo;
     private SoundbiteNavigationView nav;
-    private favouritesSQL favouritesSQL;
+    private favouritesSQL favouritesSQL = new favouritesSQL();
     public ListView listView;
     private findSongWithIDFavSQL song = new findSongWithIDFavSQL();
     private Intent music;
@@ -35,13 +35,11 @@ public class favouritesLoggedIn extends AppCompatActivity {
         super.onCreate(savedInstatnceState);
         setContentView(R.layout.activity_favourites_logged_in);
         listView = findViewById(R.id.list);
-        favouritesSQL = new favouritesSQL();
-        favouritesSQL.parent = favouritesLoggedIn.this;
-        favouritesSQL.execute(Integer.toString(LoginScreen.userID));
+
 
         imgLogo = findViewById(R.id.imgLogoTopRight);
         nav = findViewById(R.id.navigation);
-
+        startSQL();
         Intent fav = new Intent(nav.getContext(), favouritesLoggedIn.class);
         fav.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(fav);
@@ -56,44 +54,55 @@ public class favouritesLoggedIn extends AppCompatActivity {
         }));
     }
 
+    public void startSQL(){
+
+        if (favouritesSQL.getStatus() == AsyncTask.Status.PENDING || favouritesSQL.getStatus() == AsyncTask.Status.FINISHED) {
+            favouritesSQL = new favouritesSQL();
+            favouritesSQL.parent = favouritesLoggedIn.this;
+            favouritesSQL.execute(Integer.toString(LoginScreen.userID));
+        }
+    }
+
     public void onStart() {
         super.onStart();
         nav.setSelectedItemId(R.id.navigation_favourites);
+        startSQL();
 
 
     }
 
     public void faves(String s) {
-        final HashMap<String, String> favOut = new HashMap<String, String>();
-        HashMap<String, String> nameBlank = new HashMap<String, String>();
+        if (s.length() != 0) {
+            final HashMap<String, String> favOut = new HashMap<String, String>();
+            HashMap<String, String> nameBlank = new HashMap<String, String>();
 
-        listView.setAdapter(null);
-        if (!s.trim().isEmpty()) {
-            String[] sArray = s.split(",");
+            listView.setAdapter(null);
+            if (!s.trim().isEmpty()) {
+                String[] sArray = s.split(",");
 
-            //TODO FIX ERROR WHEN LOGGING IN WITH DIFFERENT USERS
-            for (int i = 0; i < sArray.length; i += 2) {
-                favOut.put(sArray[i], sArray[i + 1]);
-                nameBlank.put(sArray[i], "");
-            }
-            int j = sArray.length / 2;
-            if (j % 2 != 0) {
-                j = +1;
-            }
-            int e = 0;
-            final String[] namesArray = new String[j];
-            Map.Entry<String, String> map = favOut.entrySet().iterator().next();
-            Iterator<Map.Entry<String, String>> entryIterator = favOut.entrySet().iterator();
-            while (entryIterator.hasNext()) {
-                Map.Entry<String, String> entry = entryIterator.next();
-                namesArray[e] = entry.getKey();
-                e += 1;
-            }
+                //TODO FIX ERROR WHEN LOGGING IN WITH DIFFERENT USERS
+                for (int i = 0; i < sArray.length; i += 2) {
+                    favOut.put(sArray[i], sArray[i + 1]);
+                    nameBlank.put(sArray[i], "");
+                }
+                int j = sArray.length / 2;
+                if (j % 2 != 0) {
+                    j = +1;
+                }
+                int e = 0;
+                final String[] namesArray = new String[j];
+                Map.Entry<String, String> map = favOut.entrySet().iterator().next();
+                Iterator<Map.Entry<String, String>> entryIterator = favOut.entrySet().iterator();
+                while (entryIterator.hasNext()) {
+                    Map.Entry<String, String> entry = entryIterator.next();
+                    namesArray[e] = entry.getKey();
+                    e += 1;
+                }
 
-            List<String> list = Arrays.asList(namesArray);
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_list_item_1, list);
-            listView.setAdapter(adapter);
-        }
+                List<String> list = Arrays.asList(namesArray);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_list_item_1, list);
+                listView.setAdapter(adapter);
+            }
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -110,9 +119,18 @@ public class favouritesLoggedIn extends AppCompatActivity {
                     }
                 }
             });
+
+            listView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    Toast.makeText(favouritesLoggedIn.this, "Holding", Toast.LENGTH_SHORT).show();
+                    
+                    return false;
+                }
+            });
         }
 
-
+    }
 
     public void result(byte[] s) {
         byte[] song = s;

@@ -31,6 +31,7 @@ public class findSongReturnID extends AsyncTask<String, Void, String> {
         params.put("sour", strings[1]);
         params.put("salty", strings[2]);
         params.put("bitter", strings[3]);
+        params.put("userID", strings[4]);
         StringBuilder sbParams = new StringBuilder();
         int i = 0;
         for (String key : params.keySet()) {

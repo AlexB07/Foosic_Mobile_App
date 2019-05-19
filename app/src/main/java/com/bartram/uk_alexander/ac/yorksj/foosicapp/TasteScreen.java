@@ -106,7 +106,7 @@ public class TasteScreen extends AppCompatActivity {
                         bitter = "0";
                     }
 
-                    songRID.execute(sweet, sour, salty, bitter);
+                    songRID.execute(sweet, sour, salty, bitter, Integer.toString(LoginScreen.userID));
 
 
                 }
@@ -177,7 +177,7 @@ public class TasteScreen extends AppCompatActivity {
 
 
             calculateSweetSour();
-            Toast.makeText(getApplicationContext(), ("Finding Song..."), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), ("Finding Song..."), Toast.LENGTH_SHORT).show();
 
             song.execute(sweet, sour, salty, bitter);
         }
