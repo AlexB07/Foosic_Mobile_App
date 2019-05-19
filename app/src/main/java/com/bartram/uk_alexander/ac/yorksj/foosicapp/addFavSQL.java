@@ -5,7 +5,6 @@ import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,41 +15,37 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
 
-public class findSong extends AsyncTask <String, Integer, byte[]> {
+public class addFavSQL extends AsyncTask<String, Void, String> {
 
-    public TasteScreen parent;
+    public musicPlayer parent;
+
 
     @Override
-    protected byte[] doInBackground(String... strings) {
-
-
-        byte[] result = new byte[50];
+    protected String doInBackground(String... strings) {
         URL url;
         HttpURLConnection conn = null;
-
+        String result = "";
 
         HashMap<String, String> params = new HashMap<String, String>();
-        params.put("sweet",strings[0]);
-        params.put("sour", strings[1]);
-        params.put("salty",strings[2]);
-        params.put("bitter", strings[3]);
+        params.put("name",strings[0]);
+        params.put("idSong",strings[1]);
+        params.put("idUser",strings[2]);
         StringBuilder sbParams = new StringBuilder();
-        Log.d("var", ""+strings[0]+strings[1]+strings[2]+strings[3]);
         int i = 0;
-        for (String key : params.keySet()){
+        for (String key : params.keySet()) {
             try {
                 if (i != 0) {
                     sbParams.append("&");
                 }
                 sbParams.append(key).append("=").append(URLEncoder.encode(params.get(key), "UTF-8"));
-            } catch (UnsupportedEncodingException e){
+            } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
             i++;
         }
 
         try {
-            url = new URL("https://cs2s.yorkdc.net/~alexander.bartram/findSong.php");
+            url = new URL("https://cs2s.yorkdc.net/~alexander.bartram/addFav.php");
             conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
@@ -67,61 +62,34 @@ public class findSong extends AsyncTask <String, Integer, byte[]> {
             ds.writeBytes(paramsString);
             ds.flush();
             ds.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
         try {
-            BufferedInputStream is = new BufferedInputStream(conn.getInputStream());
+            InputStream is = new BufferedInputStream(conn.getInputStream());
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             StringBuilder res = new StringBuilder();
-            byte[] data = new byte[50];
-            byte[] id = new byte[10];
-            int current = 0;
-
-            while ((current = is.read(data,0,data.length)) != -1) {
-                buffer.write(data,0,current);
+            String line;
+            while ((line = reader.readLine()) != null) {
+                res.append(line);
             }
 
-            result = buffer.toByteArray();
-
-            Log.d("findSong", "result from server: " + buffer.toString());
-            //return test;
-        }catch (IOException e){
+            Log.d("addFav", "result from server: " + res.toString());
+            return res.toString();
+        } catch (IOException e) {
             e.printStackTrace();
-        }finally {
-            if (conn != null){
+        } finally {
+            if (conn != null) {
                 conn.disconnect();
             }
         }
-
         return result;
     }
 
-
     @Override
-    protected void onPostExecute(byte[] s) {
+    protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        byte[] test = s; //Tesing debugging statement
-        parent.testingSongOutput(s);
-        parent.changeProgress("");
-
-
-
+        parent.addFavResults(s);
     }
-
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-        parent.changeProgress("Finding Song...");
-    }
-
-    @Override
-    protected void onProgressUpdate(Integer... values) {
-      //  super.onProgressUpdate(values);
-        parent.changeProgress("Finding Song..." + values[0]);
-    }
-
-
 }

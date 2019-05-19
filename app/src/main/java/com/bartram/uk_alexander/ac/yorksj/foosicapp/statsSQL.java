@@ -1,27 +1,24 @@
 package com.bartram.uk_alexander.ac.yorksj.foosicapp;
 
 import android.os.AsyncTask;
-
+import android.util.Log;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.DataOutput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.nio.Buffer;
 
 
 public class statsSQL extends AsyncTask<String, Void, String> {
 
     public HomeScreenLoggedin parent;
+
     @Override
     protected String doInBackground(String... strings) {
 
@@ -31,22 +28,20 @@ public class statsSQL extends AsyncTask<String, Void, String> {
         String result = "";
 
         HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("id",strings[0]);
+        hashMap.put("id", strings[0]);
         StringBuilder stringBuilder = new StringBuilder();
         int i = 0;
-        for (String key : hashMap.keySet()){
+        for (String key : hashMap.keySet()) {
             try {
                 if (i != 0) {
                     stringBuilder.append("&");
                 }
                 stringBuilder.append(key).append("=").append(URLEncoder.encode(hashMap.get(key), "UTF-8"));
-            } catch (UnsupportedEncodingException e){
+            } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
             i++;
         }
-
-
 
 
         try {
@@ -68,7 +63,7 @@ public class statsSQL extends AsyncTask<String, Void, String> {
             dos.flush();
             dos.close();
 
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -80,29 +75,31 @@ public class statsSQL extends AsyncTask<String, Void, String> {
             while ((line = bufferedReader.readLine()) != null) {
                 res.append(line);
             }
+            Log.d("stats", "result from server " + res);
             return res.toString();
 
-        } catch(IOException e){
+
+        } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if (conn != null){
+            if (conn != null) {
                 conn.disconnect();
             }
         }
 
 
-
         return result;
 
     }
+
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         String test = s;
+        Log.d("test", s);
 
-        //parent.loginSuccessful(s);
+        parent.stats(s);
 
 
     }
 }
-

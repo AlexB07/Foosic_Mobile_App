@@ -20,7 +20,6 @@ import java.util.List;
 public class foodScreen extends AppCompatActivity {
 
 
-    private ImageView imgSettings;
     private SoundbiteNavigationView nav;
 
     private Intent music;
@@ -45,17 +44,7 @@ public class foodScreen extends AppCompatActivity {
         initListData();
 
 
-        imgSettings = findViewById(R.id.imgSettings);
-
-        imgSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO code settings menu
-            }
-        });
     }
-
-
     private void initViews() {
 
         expandableListView = findViewById(R.id.expList);

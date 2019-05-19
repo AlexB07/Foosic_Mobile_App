@@ -46,7 +46,7 @@ public class findSongReturnID extends AsyncTask<String, Void, String> {
         }
 
         try {
-            url = new URL("https://cs2s.yorkdc.net/~george.causer/findSongReturnID.php");
+            url = new URL("https://cs2s.yorkdc.net/~alexander.bartram/findSongReturnID.php");
             conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
@@ -93,5 +93,6 @@ public class findSongReturnID extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
+        parent.getSongID(s);
     }
 }

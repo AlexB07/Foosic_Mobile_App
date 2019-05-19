@@ -24,6 +24,7 @@ public class LoginScreen extends AppCompatActivity {
     private String result = "";
 
     static int userID = -1;
+    static String userName = "";
 
 
     @Override
@@ -71,11 +72,14 @@ public class LoginScreen extends AppCompatActivity {
 
 
     public void loginSuccessful(String s) {
+        String[] sArray = s.split(",");
         String temp;
         try {
-            temp = s.replaceAll("\\s+", "");
+            temp = sArray[0].replaceAll("\\s+", "");
             if (Integer.parseInt(temp) > 0) {
-                result = s;
+                result = sArray[0];
+                userName = sArray[1];
+
             }
         } catch (NumberFormatException e) {
             result = "";

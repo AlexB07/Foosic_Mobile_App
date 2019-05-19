@@ -12,6 +12,7 @@ import android.widget.Toast;
 public class settingScreen extends AppCompatActivity {
         private Button btnStatistics, btnSavedMusic, btnLogout, btnPreferences;
         private ImageView closeSettings;
+        private Intent favourites;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,18 +32,30 @@ public class settingScreen extends AppCompatActivity {
         btnSavedMusic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-           /*     Intent i = new Intent(v.getContext(), SavedMusic.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(i);
-*/
+                if (LoginScreen.userID > -1) {
+                    favourites = new Intent(v.getContext(), favouritesLoggedIn.class);
+                }
+                else {
+                    favourites = new Intent(v.getContext(), favouritesGuest.class);
+                }
+                favourites.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(favourites);
+
             }
         });
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LoginScreen.userID = -1;
-                Toast.makeText(settingScreen.this, "Signed Out", Toast.LENGTH_SHORT).show();
+                if (LoginScreen.userID > -1) {
+                    LoginScreen.userID = -1;
+                    Toast.makeText(settingScreen.this, "Signed Out", Toast.LENGTH_SHORT).show();
+                    btnLogout.setText("LOGOUT");
+                }else {
+                    Intent loginScreen = new Intent(getApplicationContext(), LoginScreen.class);
+                    loginScreen.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(loginScreen);
+                }
             }
         });
 
@@ -64,6 +77,14 @@ public class settingScreen extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void onStart(){
+        initialiseWidgets();
+        super.onStart();
+        if (LoginScreen.userID == -1) {
+            btnLogout.setText("LOGIN");
+        }
     }
 
 

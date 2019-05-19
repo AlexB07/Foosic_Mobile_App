@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class TasteScreen extends AppCompatActivity {
@@ -20,7 +21,9 @@ public class TasteScreen extends AppCompatActivity {
     private Spinner spBitter;
     private SeekBar sbSweetSour;
     private findSong song;
+    private findSongReturnID songRID = new findSongReturnID();
     public int sweetSour;
+    String sweet, sour, salty, bitter;
 
     private Intent music;
 
@@ -30,12 +33,15 @@ public class TasteScreen extends AppCompatActivity {
 
     private String songID;
 
+    private TextView txtProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_taste_screen);
         nav = findViewById(R.id.navigation);
+
+        txtProgress = findViewById(R.id.txtProgress);
 
         //Initialise spinners
         String[] spinnerArray = new String[]{"0", "1", "2", "3", "4", "5"};
@@ -67,40 +73,41 @@ public class TasteScreen extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (songRID.getStatus() == AsyncTask.Status.PENDING || songRID.getStatus() == AsyncTask.Status.FINISHED) {
+                    songRID = new findSongReturnID();
+                    songRID.parent = TasteScreen.this;
+                        sweet = "";
+                        sour = "";
+                        salty = "";
+                        bitter = "";
 
-                if (song.getStatus() == AsyncTask.Status.PENDING || song.getStatus() == AsyncTask.Status.FINISHED) {
-                    song = new findSong();
-                    song.parent = TasteScreen.this;
-
-
-                    String sweet = "0", sour = "0", salty = "0", bitter = "0";
-                    calculateSweetSour();
-                    Toast.makeText(getApplicationContext(), ("Finding Song..."), Toast.LENGTH_SHORT).show();
-
+                        calculateSweetSour();
                     //Setting values
                     if (sweetSour == 3) {
                         sweet = "1";
                         sour = "1";
                     } else if (sweetSour > 3) {
                         sour = "1";
+                        sweet = "0";
                     } else {
+                        sour = "0";
                         sweet = "1";
                     }
 
-                    if (Integer.parseInt(spSalty.getSelectedItem().toString()) > 0){
+                    if (Integer.parseInt(spSalty.getSelectedItem().toString()) > 0) {
                         salty = "1";
-                    }else {
+                    } else {
                         salty = "0";
                     }
 
-                    if (Integer.parseInt(spBitter.getSelectedItem().toString()) > 0){
+                    if (Integer.parseInt(spBitter.getSelectedItem().toString()) > 0) {
                         bitter = "1";
-                    }else {
+                    } else {
                         bitter = "0";
                     }
 
+                    songRID.execute(sweet, sour, salty, bitter);
 
-                    song.execute(sweet, sour, salty, bitter);
 
                 }
 
@@ -110,7 +117,7 @@ public class TasteScreen extends AppCompatActivity {
 
     }
 
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         musicPlayer.mediaPlayer.pause();
         nav.setSelectedItemId(R.id.navigation_taste);
@@ -130,7 +137,7 @@ public class TasteScreen extends AppCompatActivity {
     }
 
     public void testingSongOutput(byte[] s) {
-        String songID = "";
+        //String songID = "";
         byte[] song = new byte[s.length];
         song = s;
 
@@ -149,20 +156,35 @@ public class TasteScreen extends AppCompatActivity {
         music = new Intent(TasteScreen.this, musicPlayer.class);
         music.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         music.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        //music.putExtra("song_ID",songID);
+        music.putExtra("song_ID",songID);
         Log.e("mp3", "putting " + song.length);
-        music.putExtra("songFile",song);
+        music.putExtra("songFile", song);
         startActivity(music);
-        music.putExtra("songFile",0);
+        music.putExtra("songFile", 0);
+       // music.putExtra("song_ID",0);
 
 
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
 
     }
 
-    public void getSongID(String s){
+    public void getSongID(String s) {
         songID = s;
+        Toast.makeText(this, ""+songID, Toast.LENGTH_SHORT).show();
+        if (song.getStatus() == AsyncTask.Status.PENDING || song.getStatus() == AsyncTask.Status.FINISHED) {
+            song = new findSong();
+            song.parent = TasteScreen.this;
+
+
+            calculateSweetSour();
+            Toast.makeText(getApplicationContext(), ("Finding Song..."), Toast.LENGTH_SHORT).show();
+
+            song.execute(sweet, sour, salty, bitter);
+        }
+
     }
 
-
+    public void changeProgress(String s){
+        txtProgress.setText(s);
+    }
 }
