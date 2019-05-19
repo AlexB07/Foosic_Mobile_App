@@ -89,6 +89,9 @@ public class LoginScreen extends AppCompatActivity {
         if (!result.equals("")) {
             Toast.makeText(getApplicationContext(), "User signed", Toast.LENGTH_SHORT).show();
             userID = Integer.parseInt(result.trim());
+            Intent home = new Intent(getApplicationContext(), HomeScreenLoggedin.class);
+            home.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(home);
             reset();
         } else {
             Toast.makeText(getApplicationContext(), "User denied", Toast.LENGTH_SHORT).show();

@@ -49,6 +49,7 @@ public class settingScreen extends AppCompatActivity {
             public void onClick(View v) {
                 if (LoginScreen.userID > -1) {
                     LoginScreen.userID = -1;
+                    LoginScreen.userName = "";
                     Toast.makeText(settingScreen.this, "Signed Out", Toast.LENGTH_SHORT).show();
                     btnLogout.setText("LOGOUT");
                 }else {
