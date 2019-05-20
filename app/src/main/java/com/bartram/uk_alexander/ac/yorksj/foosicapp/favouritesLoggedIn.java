@@ -1,10 +1,15 @@
 package com.bartram.uk_alexander.ac.yorksj.foosicapp;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,6 +35,9 @@ public class favouritesLoggedIn extends AppCompatActivity {
     private findSongWithIDFavSQL song = new findSongWithIDFavSQL();
     private Intent music;
     private String item;
+    private deleteFavSQL deleteFav = new deleteFavSQL();
+    private Context context = this;
+    private String songID;
 
     protected void onCreate(Bundle savedInstatnceState) {
         super.onCreate(savedInstatnceState);
@@ -54,7 +62,7 @@ public class favouritesLoggedIn extends AppCompatActivity {
         }));
     }
 
-    public void startSQL(){
+    public void startSQL() {
 
         if (favouritesSQL.getStatus() == AsyncTask.Status.PENDING || favouritesSQL.getStatus() == AsyncTask.Status.FINISHED) {
             favouritesSQL = new favouritesSQL();
@@ -79,8 +87,6 @@ public class favouritesLoggedIn extends AppCompatActivity {
             listView.setAdapter(null);
             if (!s.trim().isEmpty()) {
                 String[] sArray = s.split(",");
-
-                //TODO FIX ERROR WHEN LOGGING IN WITH DIFFERENT USERS
                 for (int i = 0; i < sArray.length; i += 2) {
                     favOut.put(sArray[i], sArray[i + 1]);
                     nameBlank.put(sArray[i], "");
@@ -103,13 +109,16 @@ public class favouritesLoggedIn extends AppCompatActivity {
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_list_item_1, list);
                 listView.setAdapter(adapter);
             }
+
+
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    musicPlayer.mediaPlayer.pause();
                     item = (String) listView.getItemAtPosition(position);
-                    Toast.makeText(favouritesLoggedIn.this, "" + item, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(favouritesLoggedIn.this, "" + item, Toast.LENGTH_SHORT).show();
                     String songID = favOut.get(item);
-                    Toast.makeText(favouritesLoggedIn.this, "" + songID, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(favouritesLoggedIn.this, "Finding Song...", Toast.LENGTH_SHORT).show();
                     if ((song.getStatus() == AsyncTask.Status.PENDING || song.getStatus() == AsyncTask.Status.FINISHED)) {
                         song = new findSongWithIDFavSQL();
                         song.parent = favouritesLoggedIn.this;
@@ -120,16 +129,63 @@ public class favouritesLoggedIn extends AppCompatActivity {
                 }
             });
 
-            listView.setOnLongClickListener(new View.OnLongClickListener() {
+            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                 @Override
-                public boolean onLongClick(View v) {
-                    Toast.makeText(favouritesLoggedIn.this, "Holding", Toast.LENGTH_SHORT).show();
-                    
-                    return false;
+                public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+
+
+                    // get prompts.xml view
+                    LayoutInflater li = LayoutInflater.from(context);
+                    View promptsView = li.inflate(R.layout.delete_prompt, null);
+
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                            context);
+
+                    // set delete_prompts.xml to alertdialog builder
+                    alertDialogBuilder.setView(promptsView);
+
+                    // set dialog message
+                    alertDialogBuilder
+                            .setCancelable(false)
+                            .setPositiveButton("OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+
+
+                                            if (deleteFav.getStatus() == AsyncTask.Status.PENDING || deleteFav.getStatus() == AsyncTask.Status.FINISHED) {
+                                                deleteFav = new deleteFavSQL();
+                                                deleteFav.parent = favouritesLoggedIn.this;
+                                                String name = (String) listView.getItemAtPosition(position);
+                                                songID = favOut.get(name);
+                                                String userID = Integer.toString(LoginScreen.userID);
+                                                deleteFav.execute(userID, songID, name);
+                                            }
+
+
+                                        }
+                                    })
+                            .setNegativeButton("Cancel",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+
+                    // create alert dialog
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+
+                    // show it
+                    alertDialog.show();
+
+                    return true;
                 }
             });
-        }
 
+        }else {
+
+            listView.setAdapter(null);
+
+        }
     }
 
     public void result(byte[] s) {
@@ -138,11 +194,20 @@ public class favouritesLoggedIn extends AppCompatActivity {
         music.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         music.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         music.putExtra("songFile", song);
+        music.putExtra("fav","1");
         startActivity(music);
         music.putExtra("songFile", 0);
         music.putExtra("songName", item);
     }
 
+
+    public void results(String s) {
+        if (s.contains("deleted")) {
+            Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
+            startSQL();
+        }
+
+    }
 
 }
 

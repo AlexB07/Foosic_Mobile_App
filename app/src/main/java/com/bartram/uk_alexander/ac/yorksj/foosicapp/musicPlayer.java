@@ -56,7 +56,7 @@ public class musicPlayer extends AppCompatActivity {
         imgPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                changeFav();
                 if (!mediaPlayer.isPlaying()) {
                     imgPlay.setImageResource(R.drawable.ic_pause_btn);
                     mediaPlayer.start();
@@ -71,7 +71,7 @@ public class musicPlayer extends AppCompatActivity {
 
         });
 
-        imgFav.setOnClickListener(new View.OnClickListener(){
+        imgFav.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
@@ -93,11 +93,11 @@ public class musicPlayer extends AppCompatActivity {
                         .setCancelable(false)
                         .setPositiveButton("OK",
                                 new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
+                                    public void onClick(DialogInterface dialog, int id) {
                                         // get user input and set it to result
                                         // edit text
                                         result = userInput.getText().toString();
-                                        if (addFav.getStatus() == AsyncTask.Status.PENDING || addFav.getStatus() == AsyncTask.Status.FINISHED){
+                                        if (addFav.getStatus() == AsyncTask.Status.PENDING || addFav.getStatus() == AsyncTask.Status.FINISHED) {
                                             addFav = new addFavSQL();
                                             addFav.parent = musicPlayer.this;
                                             songID = getIntent().getStringExtra("song_ID");
@@ -107,13 +107,11 @@ public class musicPlayer extends AppCompatActivity {
                                         }
 
 
-
-
                                     }
                                 })
                         .setNegativeButton("Cancel",
                                 new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
+                                    public void onClick(DialogInterface dialog, int id) {
                                         dialog.cancel();
                                     }
                                 });
@@ -122,14 +120,17 @@ public class musicPlayer extends AppCompatActivity {
                 AlertDialog alertDialog = alertDialogBuilder.create();
 
                 // show it
-                if (getIntent().getByteArrayExtra("songFile") != null){
-                if (!favBtn && LoginScreen.userID > -1) {
-                    alertDialog.show();
+                if (getIntent().getByteArrayExtra("songFile") != null) {
+                    if (!favBtn && LoginScreen.userID > -1) {
+                        alertDialog.show();
+                    }
                 }
-                }
+                if (favBtn){
+                    Toast.makeText(context, "This song already exists on the app", Toast.LENGTH_SHORT).show();
+                }else
                 if (LoginScreen.userID == -1) {
                     Toast.makeText(context, "Sign in to use this feature", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     Toast.makeText(context, "select music using taste screen", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -137,18 +138,28 @@ public class musicPlayer extends AppCompatActivity {
     }
 
 
-
-
-
     public void onStart() {
         super.onStart();
         nav.setSelectedItemId(R.id.navigation_music);
         song = new byte[50];
         song = getIntent().getByteArrayExtra("songFile");
+        changeFav();
         if (!mediaPlayer.isPlaying() && (song != null)) {
             convertByteToMP3();
         }
 
+    }
+
+    public void changeFav() {
+        if (getIntent().getStringExtra("fav") != null) {
+            String test = getIntent().getStringExtra("fav");
+            if (test.equals("1")) {
+                favBtn = true;
+                imgFav.setImageResource(R.drawable.ic_fav_star);
+            } else {
+                favBtn = false;
+            }
+        }
     }
 
     public void convertByteToMP3() {
@@ -163,18 +174,20 @@ public class musicPlayer extends AppCompatActivity {
             mediaPlayer.setDataSource(fis.getFD());
             mediaPlayer.prepare();
             mediaPlayer.start();
+            imgPlay.setImageResource(R.drawable.ic_pause_btn);
             mediaPlayer.setLooping(true);
         } catch (IOException e) {
             Log.e("error", e.toString());
         }
 
     }
-    public void addFavResults(String s){
-            if (s.contains("created")){
-                imgFav.setImageResource(R.drawable.ic_fav_star);
-                favBtn = true;
-                Toast.makeText(context, "Song saved as "+result, Toast.LENGTH_SHORT).show();
-            }
+
+    public void addFavResults(String s) {
+        if (s.contains("created")) {
+            imgFav.setImageResource(R.drawable.ic_fav_star);
+            favBtn = true;
+            Toast.makeText(context, "Song saved as " + result, Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void stopPlaying() {

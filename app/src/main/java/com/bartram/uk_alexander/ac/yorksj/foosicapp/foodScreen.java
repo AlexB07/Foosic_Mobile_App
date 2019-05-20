@@ -67,13 +67,13 @@ public class foodScreen extends AppCompatActivity {
                         listViewGroup.get(groupPosition)
                                 + " : "
                                 + listViewChid.get(
-                                listViewGroup.get(groupPosition))[childPosition][1], Toast.LENGTH_SHORT)
+                                listViewGroup.get(groupPosition))[childPosition][0], Toast.LENGTH_SHORT)
                         .show();
                 musicPlayer.mediaPlayer.pause();
                 if (song.getStatus() == AsyncTask.Status.PENDING || song.getStatus() == AsyncTask.Status.FINISHED) {
                     song = new findSongWIthID();
                     song.parent = foodScreen.this;
-
+                    Toast.makeText(foodScreen.this, "Finding Song...", Toast.LENGTH_SHORT).show();
                     String tempInput = listViewChid.get(listViewGroup.get(groupPosition))[childPosition][1].toString();
 
                     song.execute(tempInput);
@@ -200,6 +200,7 @@ public class foodScreen extends AppCompatActivity {
         music.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         music.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         music.putExtra("songFile", song);
+        music.putExtra("fav", "1");
         startActivity(music);
         music.putExtra("songFile", 0);
 

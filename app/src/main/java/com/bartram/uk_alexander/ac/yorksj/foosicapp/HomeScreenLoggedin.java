@@ -24,21 +24,18 @@ public class HomeScreenLoggedin extends AppCompatActivity {
         statsTest();
         welcome = findViewById(R.id.txtWelcome);
         statsText = findViewById(R.id.txtStats);
-       // welcome.setText("Welcome Back " + LoginScreen.userName);
-
-
 
     }
 
-    private void statsTest(){
-        if (stats.getStatus() == AsyncTask.Status.PENDING || stats.getStatus() == AsyncTask.Status.FINISHED){
+    private void statsTest() {
+        if (stats.getStatus() == AsyncTask.Status.PENDING || stats.getStatus() == AsyncTask.Status.FINISHED) {
             stats = new statsSQL();
             stats.parent = HomeScreenLoggedin.this;
             stats.execute(Integer.toString(LoginScreen.userID));
         }
     }
 
-    public void reset(){
+    public void reset() {
         welcome.setText("");
         statsText.setText("");
         sArray = new String[4];
@@ -48,34 +45,32 @@ public class HomeScreenLoggedin extends AppCompatActivity {
     }
 
 
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         nav.setSelectedItemId(R.id.navigation_home);
         statsTest();
     }
+
     public void stats(String s) {
 
         if (s.length() != 0) {
             reset();
-             sArray = s.split(",");
-             time = "Average active Time: " + sArray[0];
-             total = "Total Number of Meals: " + sArray[1];
-             numOfFavs = "Number of Favourites: " + sArray[2];
+            sArray = s.split(",");
+            time = "Average active Time: " + sArray[0];
+            total = "Total Number of Meals: " + sArray[1];
+            numOfFavs = "Number of Favourites: " + sArray[2];
             //       EditText t
             Log.d("test", time);
             welcome.setText("Welcome Back " + LoginScreen.userName);
             statsText.setText(time + "\n" + total + "\n" + numOfFavs);
-        }else {
+        } else {
             reset();
             welcome.setText("Welcome Back " + LoginScreen.userName);
-            statsText.setText("Use the app to get Statistics \n After a week Statistics will appear");
+            statsText.setText("Use the app to get Statistics, \n After a week Statistics will appear");
         }
 
 
-
     }
-
-
 
 
 }

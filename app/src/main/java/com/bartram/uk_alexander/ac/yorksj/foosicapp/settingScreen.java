@@ -19,6 +19,7 @@ public class settingScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting_screen);
         initialiseWidgets();
+       changeBtnStats();
         btnStatistics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +53,11 @@ public class settingScreen extends AppCompatActivity {
                     LoginScreen.userName = "";
                     Toast.makeText(settingScreen.this, "Signed Out", Toast.LENGTH_SHORT).show();
                     btnLogout.setText("LOGOUT");
+                    Intent homeScreen = new Intent(getApplicationContext(), homeScreenGuest.class);
+                    homeScreen.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    musicPlayer.mediaPlayer.pause();
+                    startActivity(homeScreen);
+
                 }else {
                     Intent loginScreen = new Intent(getApplicationContext(), LoginScreen.class);
                     loginScreen.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -63,10 +69,10 @@ public class settingScreen extends AppCompatActivity {
         btnPreferences.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             /*   Intent i = new Intent(v.getContext(), PreferencesPage.class);
+               Intent i = new Intent(v.getContext(), preferences.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
-*/
+
             }
         });
 
@@ -80,8 +86,19 @@ public class settingScreen extends AppCompatActivity {
 
     }
 
+    public void changeBtnStats(){
+        if (LoginScreen.userID == -1){
+            btnStatistics.setVisibility(View.INVISIBLE);
+            btnLogout.setText("LOGIN");
+        }else {
+            btnStatistics.setVisibility(View.VISIBLE);
+            btnLogout.setText("LOGOUT");
+        }
+    }
+
     public void onStart(){
         initialiseWidgets();
+        changeBtnStats();
         super.onStart();
         if (LoginScreen.userID == -1) {
             btnLogout.setText("LOGIN");

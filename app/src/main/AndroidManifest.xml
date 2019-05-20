@@ -13,10 +13,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".statistics"></activity>
-        <activity android:name=".HomeScreenLoggedin" />
-        <activity android:name=".favouritesLoggedIn" />
-        <activity android:name=".settingScreen" />
+        <activity android:name=".preferences"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".statistics"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".HomeScreenLoggedin"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".favouritesLoggedIn"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".settingScreen"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".musicPlayer"
             android:screenOrientation="portrait" />

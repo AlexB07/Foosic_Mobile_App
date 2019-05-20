@@ -150,7 +150,7 @@ public class TasteScreen extends AppCompatActivity {
 
 
         if (!songID.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Completed song ID" + songID, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Found Song" , Toast.LENGTH_SHORT).show();
         }
 
         music = new Intent(TasteScreen.this, musicPlayer.class);
@@ -159,8 +159,10 @@ public class TasteScreen extends AppCompatActivity {
         music.putExtra("song_ID",songID);
         Log.e("mp3", "putting " + song.length);
         music.putExtra("songFile", song);
+        music.putExtra("fav","2");
         startActivity(music);
         music.putExtra("songFile", 0);
+
        // music.putExtra("song_ID",0);
 
 
@@ -170,7 +172,7 @@ public class TasteScreen extends AppCompatActivity {
 
     public void getSongID(String s) {
         songID = s;
-        Toast.makeText(this, ""+songID, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, ""+songID, Toast.LENGTH_SHORT).show();
         if (song.getStatus() == AsyncTask.Status.PENDING || song.getStatus() == AsyncTask.Status.FINISHED) {
             song = new findSong();
             song.parent = TasteScreen.this;
